@@ -25,21 +25,37 @@ namespace Jupiter
              
         }
 
-        protected bool UploadPicture(string fileName, string contentType, byte[] picData, string email)
-        {
-            bool responseStatus = false;
-            responseStatus= db.UploadProfilePic(fileName,contentType,picData,email);
-            return responseStatus;
-        }
+      
         protected void Button_OnClick_Submit(object sender,EventArgs eventArgs)
         {
-            bool response;
-            string filename = Path.GetFileName(FileUploadProfilePic.PostedFile.FileName);
-            string contentType = FileUploadProfilePic.PostedFile.ContentType;
-            Stream fs = FileUploadProfilePic.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(fs);
-            byte[] picData=br.ReadBytes((Int32)fs.Length);
+            bool response = false;
+            if (CheckFieldForNulls() && CheckPassword())
+            {
+                Worker worker = new Worker { FirstName = TextBoxFirstName.Text, LastName = TextBoxLastName.Text, Email = TextBoxEmail.Text, Password = TextBoxPassword.Text };
+                if (response = db.Create(worker))
+                {
+                    Session["firstName"] = worker.FirstName;
+                    Session["lastName"] = worker.LastName;
+                    Session["email"] = worker.Email;
+                    Session["password"] = worker.Password;
+                    
 
+                }
+
+            }
+            if (response)
+            {
+                if (FileUploadProfilePic.HasFile)
+                {
+                    var returnStruct = CheckIfFile();
+                    
+                }
+            }
+            //Response.Redirect("Login.aspx");
+        }
+        private bool CheckFieldForNulls()
+        {
+            bool valid = false;
             if (TextBoxFirstName != null && TextBoxLastName != null && TextBoxEmail.Text != null && TextBoxPassword.Text != null && TextBoxConfirmPassword != null)
             {
                 TextBoxFirstName.BorderColor = System.Drawing.Color.Empty;
@@ -50,46 +66,9 @@ namespace Jupiter
 
                 LabelWarningMessage.Text = string.Empty;
 
+                valid = true;
 
-                if (TextBoxPassword.Text == TextBoxConfirmPassword.Text)
-                {
-                    Worker worker = new Worker { FirstName = TextBoxFirstName.Text, LastName = TextBoxLastName.Text, Email = TextBoxEmail.Text, Password = TextBoxPassword.Text };
-                    if (response = db.Create(worker))
-                    {
-                        Session["firstName"] = worker.FirstName;
-                        Session["lastName"] = worker.LastName;
-                        Session["email"] = worker.Email;
-                        Session["password"] = worker.Password;
 
-                        /*LabelWarningMessage.Text = "Welcome!" + worker.FirstName + "!"+response.ToString();*/
-                        /*   LabelWarningMessage.ForeColor = System.Drawing.Color.Green;*/
-                        if (FileUploadProfilePic.HasFile)
-                        {
-                           response= UploadPicture(filename, contentType, picData, worker.Email);
-                            LabelWarningMessage.Text = response.ToString();
-                        }
-                            TextBoxPassword.BorderColor = System.Drawing.Color.Empty;
-                        TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Empty;
-
-                        //Response.Redirect("Login.aspx");
-                    }
-                    else
-                    {
-                        LabelWarningMessage.Text = "That Email is already in use!"+response.ToString();
-                        TextBoxEmail.BorderColor = System.Drawing.Color.Red;
-                    }
-
-                    
-
-                   
-                }
-                else
-                {
-                    TextBoxPassword.BorderColor = System.Drawing.Color.Red;
-                    TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Red;
-                    LabelWarningMessage.Text = "Passwords do not match";
-                    LabelWarningMessage.ForeColor = System.Drawing.Color.Red;
-                }
 
             }
             else
@@ -100,19 +79,61 @@ namespace Jupiter
                 TextBoxPassword.BorderColor = System.Drawing.Color.Red;
                 LabelWarningMessage.Text = "All Feilds are required";
                 LabelWarningMessage.ForeColor = System.Drawing.Color.Red;
-                
-                
+
+                valid = false;
+
 
             }
+            return valid;
+        }
+        private bool CheckPassword()
+        {
+            bool valid = false;
+            if (TextBoxPassword.Text == TextBoxConfirmPassword.Text)
+            {
+
+                /*LabelWarningMessage.Text = "Welcome!" + worker.FirstName + "!"+response.ToString();*/
+                /*   LabelWarningMessage.ForeColor = System.Drawing.Color.Green;*/
+
+                TextBoxPassword.BorderColor = System.Drawing.Color.Empty;
+                TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Empty;
+                LabelWarningMessage.Text = string.Empty;
+                valid = true;
+            }
+
+            else
+            {
+                TextBoxPassword.BorderColor = System.Drawing.Color.Red;
+                TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Red;
+                LabelWarningMessage.Text = "Passwords do not match";
+            }
+            return valid;
+            }      
+        private (string filename,string contentType,byte[] picData) CheckIfFile()
+        {
             
+            string filename=null;
+            string contentType=null;
+            byte[] picData = null;
+
+            if (FileUploadProfilePic.HasFile)
+            {
                 
-                
+                filename = Path.GetFileName(FileUploadProfilePic.PostedFile.FileName);
+                contentType = FileUploadProfilePic.PostedFile.ContentType;
+                Stream fs = FileUploadProfilePic.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+                picData = br.ReadBytes((Int32)fs.Length);
 
-
-            
-
+            }
+            return (filename,contentType,picData);
+        }
+        protected bool UploadPicture(string fileName, string contentType, byte[] picData, string email)
+        {
+            bool responseStatus = false;
+            responseStatus = db.UploadProfilePic(fileName, contentType, picData, email);
+            return responseStatus;
         }
 
-       
     }
 }

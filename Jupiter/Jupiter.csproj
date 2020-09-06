@@ -145,6 +145,7 @@
     <Compile Include="MasterPageAdmin.Master.designer.cs">
       <DependentUpon>MasterPageAdmin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProfilePicture.cs" />
     <Compile Include="Models\Worker.cs" />
     <Compile Include="AddProduct.aspx.cs">
       <DependentUpon>AddProduct.aspx</DependentUpon>
