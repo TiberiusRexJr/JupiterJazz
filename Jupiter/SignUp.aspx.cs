@@ -19,6 +19,7 @@ namespace Jupiter
     public partial class SignUp : System.Web.UI.Page
     {
         private DataBase db = new DataBase();
+   
         protected void Page_Load(object sender, EventArgs e)
         {
            
@@ -32,22 +33,37 @@ namespace Jupiter
             if (CheckFieldForNulls() && CheckPassword())
             {
                 Worker worker = new Worker { FirstName = TextBoxFirstName.Text, LastName = TextBoxLastName.Text, Email = TextBoxEmail.Text, Password = TextBoxPassword.Text };
-                if (response = db.Create(worker))
+                if (response = db.Create(worker)) //possible fuck up area
                 {
                     Session["firstName"] = worker.FirstName;
                     Session["lastName"] = worker.LastName;
                     Session["email"] = worker.Email;
                     Session["password"] = worker.Password;
-                    
+
+                    LabelWarningMessage.Text = string.Empty;
+                    LabelWarningMessage.ForeColor = Color.Red;
+                }
+                else
+                {
+                    LabelWarningMessage.Text = "Error!"+response.ToString();
+                    LabelWarningMessage.ForeColor = Color.Empty;
 
                 }
 
             }
-            if (response)
+            if (response) //PFUA
             {
                 if (FileUploadProfilePic.HasFile)
                 {
-                    var returnStruct = CheckIfFile();
+                    var _ = GetPicData();
+                    bool statusforupload = false;
+                    Worker w = db.RetrieveByEmail(Session["email"].ToString());
+                    Console.WriteLine(Session["email"].ToString());
+
+                    Console.WriteLine(w.Id.ToString());
+                    UserProfilePicture picture = new UserProfilePicture(_.filename,w.Id, _.contentType, _.picData);
+                    statusforupload= db.UploadProfilePic(picture);
+                    LabelWarningMessage.Text = statusforupload.ToString();
                     
                 }
             }
@@ -56,13 +72,13 @@ namespace Jupiter
         private bool CheckFieldForNulls()
         {
             bool valid = false;
-            if (TextBoxFirstName != null && TextBoxLastName != null && TextBoxEmail.Text != null && TextBoxPassword.Text != null && TextBoxConfirmPassword != null)
+            if (TextBoxFirstName.Text!= string.Empty && TextBoxLastName.Text != string.Empty && TextBoxEmail.Text != string.Empty && TextBoxPassword.Text != string.Empty && TextBoxConfirmPassword.Text != string.Empty)
             {
                 TextBoxFirstName.BorderColor = System.Drawing.Color.Empty;
                 TextBoxLastName.BorderColor = System.Drawing.Color.Empty;
                 TextBoxEmail.BorderColor = System.Drawing.Color.Empty;
                 TextBoxPassword.BorderColor = System.Drawing.Color.Empty;
-
+                TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Empty;
 
                 LabelWarningMessage.Text = string.Empty;
 
@@ -77,10 +93,10 @@ namespace Jupiter
                 TextBoxLastName.BorderColor = System.Drawing.Color.Red;
                 TextBoxEmail.BorderColor = System.Drawing.Color.Red;
                 TextBoxPassword.BorderColor = System.Drawing.Color.Red;
+                TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Red;
                 LabelWarningMessage.Text = "All Feilds are required";
-                LabelWarningMessage.ForeColor = System.Drawing.Color.Red;
+                LabelWarningMessage.ForeColor = System.Drawing.Color.Empty;
 
-                valid = false;
 
 
             }
@@ -106,10 +122,11 @@ namespace Jupiter
                 TextBoxPassword.BorderColor = System.Drawing.Color.Red;
                 TextBoxConfirmPassword.BorderColor = System.Drawing.Color.Red;
                 LabelWarningMessage.Text = "Passwords do not match";
+           
             }
             return valid;
             }      
-        private (string filename,string contentType,byte[] picData) CheckIfFile()
+        private (string filename,string contentType,byte[] picData) GetPicData()
         {
             
             string filename=null;
@@ -118,8 +135,9 @@ namespace Jupiter
 
             if (FileUploadProfilePic.HasFile)
             {
-                
+
                 filename = Path.GetFileName(FileUploadProfilePic.PostedFile.FileName);
+               
                 contentType = FileUploadProfilePic.PostedFile.ContentType;
                 Stream fs = FileUploadProfilePic.PostedFile.InputStream;
                 BinaryReader br = new BinaryReader(fs);
@@ -128,12 +146,12 @@ namespace Jupiter
             }
             return (filename,contentType,picData);
         }
-        protected bool UploadPicture(string fileName, string contentType, byte[] picData, string email)
+      /*  protected bool UploadPicture(string fileName, string contentType, byte[] picData, string email)
         {
             bool responseStatus = false;
             responseStatus = db.UploadProfilePic(fileName, contentType, picData, email);
             return responseStatus;
-        }
+        }*/
 
     }
 }

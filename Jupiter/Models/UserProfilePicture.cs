@@ -9,10 +9,10 @@ namespace Jupiter.Models
     {
         
         #region Properties
-        string FileName { get; set; }
-        int OwnerId { get; set; }
-        string ContentType { get; set; }
-        byte[] PicData { get; set; }
+        public string FileName { get; set; }
+        public int OwnerId { get; set; }
+        public string ContentType { get; set; }
+        public byte[] PicData { get; set; }
 
         #endregion
         #region Constructor
