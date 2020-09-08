@@ -9,12 +9,24 @@ using Microsoft.Azure;
 using Azure.Storage.Blobs;
 using System.Configuration;
 using Microsoft.Extensions.Azure;
+using Microsoft.Extensions.Configuration;
 
 namespace Jupiter.Services
 {
     public class BlobShit
 
     {
+        private static IConfiguration _configuration;
+        
+        public BlobShit(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        public void OnGet()
+        {
+            string secretString = string.Empty;
+            secretString = _configuration["JupiterJazzKeyValutSecretKeyJupiterJazzStorageConnectionString"];
+        }
        /* ConfigurationManager.AppSettings.GetValues("ldb");
         var someSetting = Environment.ExpandEnvironmentVariables(
                      ConfigurationManager.ConnectionStrings.AddBlobServiceClient
