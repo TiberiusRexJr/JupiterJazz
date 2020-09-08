@@ -15,7 +15,7 @@ namespace Jupiter.Services
     public class BlobShit
 
     {
-        ConfigurationManager.AppSettings.GetValues("ldb");
+       /* ConfigurationManager.AppSettings.GetValues("ldb");
         var someSetting = Environment.ExpandEnvironmentVariables(
                      ConfigurationManager.ConnectionStrings.AddBlobServiceClient
         BlobServiceClient blobServiceClient = new BlobServiceClient(Environment.ExpandEnvironmentVariables.);
@@ -26,6 +26,6 @@ namespace Jupiter.Services
         string containerName = "quickstartblobs" + Guid.NewGuid().ToString();
 
         // Create the container and return a container client object
-        BlobContainerClient containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);
+        BlobContainerClient containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);*/
     }
 }
