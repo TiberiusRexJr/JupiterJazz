@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XKzGXlb98KQYVKNicUOcF3a1VkNLow4HtlDLsekp1dy8D6o6zQLMVifNb0vE0YTl100NXHfoU6fR29AyrwBsTA==",
+  "dgSpecHash": "JvhTodSt5qADfDWNHbIU3hOPJKrg0e2LLhhNtUZm0JomiSq+ZPmtq5KtrUSow8qakzXz7HC4j9dqSSacYUixag==",
   "success": true,
   "projectFilePath": "C:\\Users\\rouni\\Desktop\\JupiterJazz\\TestKeyVault\\TestKeyVault.csproj",
   "expectedPackageFiles": [
@@ -11,8 +11,6 @@
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.azure.keyvault.webkey\\3.0.5\\microsoft.azure.keyvault.webkey.3.0.5.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.azure.services.appauthentication\\1.5.0\\microsoft.azure.services.appauthentication.1.5.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
-    "C:\\Users\\rouni\\.nuget\\packages\\microsoft.configuration.configurationbuilders.azure\\2.0.0\\microsoft.configuration.configurationbuilders.azure.2.0.0.nupkg.sha512",
-    "C:\\Users\\rouni\\.nuget\\packages\\microsoft.configuration.configurationbuilders.base\\2.0.0\\microsoft.configuration.configurationbuilders.base.2.0.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.7\\microsoft.extensions.configuration.3.1.7.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.7\\microsoft.extensions.configuration.abstractions.3.1.7.nupkg.sha512",
@@ -130,26 +128,5 @@
     "C:\\Users\\rouni\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Configuration.ConfigurationBuilders.Azure 2.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.Configuration.ConfigurationBuilders.Azure",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Configuration.ConfigurationBuilders.Base 2.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.Configuration.ConfigurationBuilders.Base",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }

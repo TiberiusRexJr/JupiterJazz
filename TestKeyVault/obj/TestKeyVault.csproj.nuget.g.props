@@ -17,6 +17,5 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\rouni\.nuget\packages\newtonsoft.json\10.0.3</PkgNewtonsoft_Json>
-    <PkgMicrosoft_Configuration_ConfigurationBuilders_Azure Condition=" '$(PkgMicrosoft_Configuration_ConfigurationBuilders_Azure)' == '' ">C:\Users\rouni\.nuget\packages\microsoft.configuration.configurationbuilders.azure\2.0.0</PkgMicrosoft_Configuration_ConfigurationBuilders_Azure>
   </PropertyGroup>
 </Project>

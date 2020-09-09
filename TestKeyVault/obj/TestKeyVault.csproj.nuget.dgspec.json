@@ -62,10 +62,6 @@
               "target": "Package",
               "version": "[1.5.0, )"
             },
-            "Microsoft.Configuration.ConfigurationBuilders.Azure": {
-              "target": "Package",
-              "version": "[2.0.0, )"
-            },
             "Microsoft.Extensions.Configuration.AzureKeyVault": {
               "target": "Package",
               "version": "[3.1.7, )"
