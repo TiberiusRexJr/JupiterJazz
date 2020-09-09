@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2020-09-08T20:25:05.2759888Z"
+    }
+  },
+  "parameters": {
+    "resourceGroup": {
+      "Type": "resourceGroup",
+      "Value": "ldb"
+    },
+    "subscriptionId": {
+      "Type": "subscription",
+      "Value": "bf67a631-5a77-48c1-8d01-414f6cfaf75c"
+    }
+  }
+}
