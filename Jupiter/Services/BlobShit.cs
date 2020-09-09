@@ -22,10 +22,12 @@ namespace Jupiter.Services
         {
             _configuration = configuration;
         }
-        public void OnGet()
+        public string OnGet()
         {
             string secretString = string.Empty;
             secretString = _configuration["JupiterJazzKeyValutSecretKeyJupiterJazzStorageConnectionString"];
+
+            return secretString;
         }
        /* ConfigurationManager.AppSettings.GetValues("ldb");
         var someSetting = Environment.ExpandEnvironmentVariables(

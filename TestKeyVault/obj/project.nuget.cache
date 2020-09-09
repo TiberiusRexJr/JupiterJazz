@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JvhTodSt5qADfDWNHbIU3hOPJKrg0e2LLhhNtUZm0JomiSq+ZPmtq5KtrUSow8qakzXz7HC4j9dqSSacYUixag==",
+  "dgSpecHash": "T07/GvxVV/tIZIjvO0B2VxrCZABHB3fVsAfdfQ+x5g05n2U99TOqwIngdUKI15vGldkPzFlJvY70nTjAsV9/kA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rouni\\Desktop\\JupiterJazz\\TestKeyVault\\TestKeyVault.csproj",
+  "projectFilePath": "C:\\Users\\rouni\\Desktop\\CODE\\Jupiter-jasper\\TestKeyVault\\TestKeyVault.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rouni\\.nuget\\packages\\azure.core\\1.5.0\\azure.core.1.5.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\azure.identity\\1.2.2\\azure.identity.1.2.2.nupkg.sha512",
@@ -11,6 +11,8 @@
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.azure.keyvault.webkey\\3.0.5\\microsoft.azure.keyvault.webkey.3.0.5.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.azure.services.appauthentication\\1.5.0\\microsoft.azure.services.appauthentication.1.5.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
+    "C:\\Users\\rouni\\.nuget\\packages\\microsoft.configuration.configurationbuilders.azure\\2.0.0\\microsoft.configuration.configurationbuilders.azure.2.0.0.nupkg.sha512",
+    "C:\\Users\\rouni\\.nuget\\packages\\microsoft.configuration.configurationbuilders.base\\2.0.0\\microsoft.configuration.configurationbuilders.base.2.0.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.7\\microsoft.extensions.configuration.3.1.7.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.7\\microsoft.extensions.configuration.abstractions.3.1.7.nupkg.sha512",
@@ -37,7 +39,7 @@
     "C:\\Users\\rouni\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
-    "C:\\Users\\rouni\\.nuget\\packages\\runtime.native.system.io.compression\\4.3.0\\runtime.native.system.io.compression.4.3.0.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\runtime.native.system.io.compression\\4.3.0\\runtime.native.system.io.compression.4.3.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\runtime.native.system.net.http\\4.3.0\\runtime.native.system.net.http.4.3.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\runtime.native.system.security.cryptography.apple\\4.3.0\\runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
@@ -128,5 +130,26 @@
     "C:\\Users\\rouni\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\rouni\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Configuration.ConfigurationBuilders.Azure 2.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Configuration.ConfigurationBuilders.Azure",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Configuration.ConfigurationBuilders.Base 2.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Configuration.ConfigurationBuilders.Base",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
