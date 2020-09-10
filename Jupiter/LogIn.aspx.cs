@@ -26,8 +26,8 @@ namespace Jupiter
                     CheckBoxRememberPassword.Checked = true;
                 }
             }
-         LabelWarning.Text=ConfigurationManager.AppSettings["JupiterJazzKeyValutSecretKeyJupiterJazzStorageConnectionString"];
-           
+
+            /*LabelWarning.Text = ConfigurationManager.AppSettings.Get("JupiterJazzKeyValutSecretKeyJupiterJazzStorageConnectionString");*/
             /*if (Session["password"] != null)
             {
                 TextBoxPassword.Text = Session["password"].ToString();

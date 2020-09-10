@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "secrets1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.KeyVault/vaults/JupiterJazzKeyVault1",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/JupiterJazzKeyVault1",
       "type": "secrets.keyVault",
-      "connectionId": "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT",
+      "connectionId": "JupiterJazzKeyVault",
       "secretStore": null
     }
   }
