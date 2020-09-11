@@ -5,39 +5,75 @@ using System.Web;
 using Microsoft.WindowsAzure;
 using Microsoft.Azure;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using System.Configuration;
 using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
+using System.Threading;
+using Azure;
 
 namespace Jupiter.Services
 {
     public class BlobShit
 
     {
-        private static IConfiguration _configuration;
-        
-        public BlobShit(IConfiguration configuration)
+        #region Variables
+        private readonly string BlobPattern = "Blob";
+        #endregion
+        #region Properties
+        public BlobServiceClient BlobClient { get; set; } 
+        #endregion
+        #region Constructor
+         public BlobShit()
         {
-            _configuration = configuration;
+            try {
+                BlobClient = new BlobServiceClient(ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey"));
+                
+            }
+            catch (Exception e)
+            {
+                
+                Console.WriteLine(e.Message);
+                throw new Exception();
+            }
         }
-        public string OnGet()
+        #endregion
+        #region Functions
+        public bool UserContainerExist(string userEmail)
         {
-            string secretString = string.Empty;
-            secretString = _configuration["JupiterJazzKeyValutSecretKeyJupiterJazzStorageConnectionString"];
-
-            return secretString;
+            throw new NotImplementedException();
         }
-       /* ConfigurationManager.AppSettings.GetValues("ldb");
-        var someSetting = Environment.ExpandEnvironmentVariables(
-                     ConfigurationManager.ConnectionStrings.AddBlobServiceClient
-        BlobServiceClient blobServiceClient = new BlobServiceClient(Environment.ExpandEnvironmentVariables.);
-        // Create a BlobServiceClient object which will be used to create a container client
-        BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+        public string CreateUserContainer(string userEmail)
+        {
+            #region Variables
+                IDictionary<string, string> metadata = new Dictionary<string, string>();
+                CancellationTokenSource source = new CancellationTokenSource();
+                CancellationToken token = source.Token;
+            string responseString = string.Empty;
+            
+            #endregion
+            #region TryCatchExecute
+            try
+            {
+               var response= BlobClient.CreateBlobContainer(BlobPattern + userEmail, PublicAccessType.Blob,metadata, token);
+                responseString=response.GetRawResponse().ToString();
+            }
+            catch(Exception e)
+            { Console.WriteLine(e.Message); }
+            
+            #endregion
+            return responseString;
+        }
+        public bool DeleteUserContainer(string userEmail)
+        { 
+            throw new NotImplementedException();
 
-        //Create a unique name for the container
-        string containerName = "quickstartblobs" + Guid.NewGuid().ToString();
+        }
+        public bool InsertIntoUserContainer(string userEmail)
+        { 
+            throw new NotImplementedException();
 
-        // Create the container and return a container client object
-        BlobContainerClient containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);*/
+        }
+        #endregion
     }
 }

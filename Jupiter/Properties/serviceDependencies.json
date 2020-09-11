@@ -3,6 +3,10 @@
     "secrets1": {
       "type": "secrets",
       "connectionId": "JupiterJazzKeyVault"
+    },
+    "storage1": {
+      "type": "storage",
+      "connectionId": "JupiterJazzStorageKey"
     }
   }
 }

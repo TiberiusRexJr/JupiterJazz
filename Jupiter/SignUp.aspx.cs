@@ -12,17 +12,19 @@ using System.Drawing;
 
 using System.IO;
 using System.Data;
-
+using Jupiter.Services;
 
 namespace Jupiter
 {
     public partial class SignUp : System.Web.UI.Page
     {
         private DataBase db = new DataBase();
+        BlobShit b = new BlobShit();
    
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            string email = "emailTest";
+            LabelWarningMessage.Text = b.CreateUserContainer(email);
              
         }
 

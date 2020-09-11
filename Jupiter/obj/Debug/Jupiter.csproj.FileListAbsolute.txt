@@ -519,3 +519,17 @@ C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\obj\Debug\Jupiter.csproj.Copy
 C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\obj\Debug\Jupiter.dll
 C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\obj\Debug\Jupiter.pdb
 C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\obj\Debug\Jupiter.csprojAssemblyReference.cache
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Azure.Storage.Files.Shares.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Azure.Storage.Queues.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Azure.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Options.dll
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Azure.Storage.Files.Shares.xml
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Azure.Storage.Queues.xml
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Azure.xml
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Configuration.Binder.xml
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\rouni\Desktop\CODE\Jupiter-jasper\Jupiter\bin\Microsoft.Extensions.Options.xml

@@ -27,7 +27,7 @@ namespace Jupiter
                 }
             }
 
-            /*LabelWarning.Text = ConfigurationManager.AppSettings.Get("JupiterJazzKeyValutSecretKeyJupiterJazzStorageConnectionString");*/
+            /*LabelWarning.Text = ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey");*/
             /*if (Session["password"] != null)
             {
                 TextBoxPassword.Text = Session["password"].ToString();
