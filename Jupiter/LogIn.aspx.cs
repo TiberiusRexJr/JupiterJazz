@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Jupiter.DataLayer;
 using Jupiter.Models;
+using Jupiter.Services;
 
 namespace Jupiter
 {
     public partial class LogIn : System.Web.UI.Page
     {
         DataBase db = new DataBase();
+     
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,7 +26,8 @@ namespace Jupiter
                     CheckBoxRememberPassword.Checked = true;
                 }
             }
-           
+
+            /*LabelWarning.Text = ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey");*/
             /*if (Session["password"] != null)
             {
                 TextBoxPassword.Text = Session["password"].ToString();

@@ -18,7 +18,7 @@ namespace Jupiter.DataLayer
         private readonly string _password = "supersix5!";
         private readonly string _database = "ldb";
         private readonly string _procedureName="dbo.WinningAtWalmart_CRUD";
-        private readonly string _procedureExtras = "Extras";
+        private readonly string _procedureProfilePic = "AddProfilePic";
         #endregion
         #region Properties
         public SqlConnection DbConnection { get; set; }
@@ -308,26 +308,41 @@ namespace Jupiter.DataLayer
             throw new NotImplementedException();
         }
 
-        public bool UploadProfilePic(string filename,string contentType,byte[] picData,string userEmail)
+        public bool UploadProfilePic(UserProfilePicture picture)
         {
             #region Variables
             int rowCount = 0;
+            int queryCode = 1;
             bool UploadStatus = false;
-            SqlCommand cmd = new SqlCommand(_procedureExtras, DbConnection);
+            SqlCommand cmd = new SqlCommand(_procedureProfilePic, DbConnection);
             cmd.CommandType = CommandType.StoredProcedure;
             #endregion
             #region Parameters
-            cmd.Parameters.AddWithValue("@filename", filename);
-            cmd.Parameters.AddWithValue("@contentType", contentType);
-            cmd.Parameters.AddWithValue("@picData", picData);
-            cmd.Parameters.AddWithValue("@userEmail", userEmail);
+            cmd.Parameters.AddWithValue("@filename", picture.FileName);
+            cmd.Parameters.AddWithValue("@contentType", picture.ContentType);
+            cmd.Parameters.AddWithValue("@picData", picture.PicData);
+            cmd.Parameters.AddWithValue("@userId",picture.OwnerId);
+            cmd.Parameters.AddWithValue("@query",queryCode);
+
             #endregion
             #region TryExecute
-            rowCount = cmd.ExecuteNonQuery();
-            if (rowCount != 0)
-            {
-                UploadStatus = true;
+            try {
+                DbConnection.Open();
+                rowCount = cmd.ExecuteNonQuery();
+                if (rowCount != 0)
+                {
+                    UploadStatus = true;
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message.ToString());
+            }
+            finally
+            {
+                DbConnection.Close();
+            }
+            
             #endregion
             return UploadStatus;
                 }

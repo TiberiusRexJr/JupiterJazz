@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "storage1": {
+      "restored": true,
+      "restoreTime": "2020-09-10T07:46:29.0369708Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2020-09-10T05:07:10.5238379Z"
+    }
+  },
+  "parameters": {
+    "resourceGroup": {
+      "Type": "resourceGroup",
+      "Value": "ldb"
+    },
+    "storage1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "ldb"
+    },
+    "storage1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "bf67a631-5a77-48c1-8d01-414f6cfaf75c"
+    },
+    "secrets1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "ldb"
+    },
+    "secrets1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "bf67a631-5a77-48c1-8d01-414f6cfaf75c"
+    },
+    "subscriptionId": {
+      "Type": "subscription",
+      "Value": "bf67a631-5a77-48c1-8d01-414f6cfaf75c"
+    }
+  }
+}
