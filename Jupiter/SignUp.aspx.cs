@@ -13,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Data;
 using Jupiter.Services;
+using System.Threading.Tasks;
 
 namespace Jupiter
 {
@@ -24,11 +25,17 @@ namespace Jupiter
         protected void Page_Load(object sender, EventArgs e)
         {
             string email = "emailTest";
-            LabelWarningMessage.Text = b.CreateUserContainer(email);
+            
+            LabelWarningMessage.Text = 
              
         }
 
-      
+
+        private async  CreateUserContainer(string email)
+        {
+            var result=await b.CreateUserContainer(email);
+            return result;
+        };
         protected void Button_OnClick_Submit(object sender,EventArgs eventArgs)
         {
             bool response = false;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,7 @@ using Microsoft.Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using System.Configuration;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
@@ -21,13 +23,13 @@ namespace Jupiter.Services
         private readonly string BlobPattern = "Blob";
         #endregion
         #region Properties
-        public BlobServiceClient BlobClient { get; set; } 
+        public BlobServiceClient BlobSClient { get; set; }
         #endregion
         #region Constructor
          public BlobShit()
         {
             try {
-                BlobClient = new BlobServiceClient(ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey"));
+                BlobSClient = new BlobServiceClient(ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey"));
                 
             }
             catch (Exception e)
@@ -43,26 +45,65 @@ namespace Jupiter.Services
         {
             throw new NotImplementedException();
         }
-        public string CreateUserContainer(string userEmail)
+        /*    public string CreateUserContainer(string userEmail)
+            {
+                #region Variables
+                    IDictionary<string, string> metadata = new Dictionary<string, string>();
+                    CancellationTokenSource source = new CancellationTokenSource();
+                    CancellationToken token = source.Token;
+                string responseString = string.Empty;
+
+                #endregion
+                #region TryCatchExecute
+                try
+                {
+                   var response= BlobClient.CreateBlobContainer(BlobPattern + userEmail, PublicAccessType.Blob,metadata, token);
+                    responseString=response.GetRawResponse().ToString();
+                }
+                catch(Exception e)
+                { Console.WriteLine(e.Message); }
+
+                #endregion
+                return responseString;
+            }*/
+        /*   public bool CreateUserContainer(string userEmail)
+           {
+               #region variables
+               string newContainer =  BlobPattern + userEmail;
+               newContainer.ToLower();
+               #endregion
+               #region HttpRequest
+               HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ldbstorage.blob.core.windows.net/"+ newContainer+"? restype=container");
+               #endregion
+               throw new NotImplementedException();
+           }*/
+        public  async Task<BlobContainerClient> CreateUserContainer(string userEmail)
         {
-            #region Variables
-                IDictionary<string, string> metadata = new Dictionary<string, string>();
-                CancellationTokenSource source = new CancellationTokenSource();
-                CancellationToken token = source.Token;
-            string responseString = string.Empty;
-            
+            #region variables
+            string newContainer = BlobPattern + userEmail;
+            newContainer.ToLower();
             #endregion
-            #region TryCatchExecute
+            #region TryCatch
             try
             {
-               var response= BlobClient.CreateBlobContainer(BlobPattern + userEmail, PublicAccessType.Blob,metadata, token);
-                responseString=response.GetRawResponse().ToString();
+                // Create the container
+                BlobContainerClient container = await BlobSClient.CreateBlobContainerAsync(newContainer);
+
+                if (await container.ExistsAsync())
+                {
+                    Console.WriteLine("Created container {0}", container.Name);
+                    return container;
+                }
             }
-            catch(Exception e)
-            { Console.WriteLine(e.Message); }
-            
+            catch (RequestFailedException e)
+            {
+                Console.WriteLine("HTTP error code {0}: {1}",
+                                    e.Status, e.ErrorCode);
+                Console.WriteLine(e.Message);
+            }
+
+            return null;
             #endregion
-            return responseString;
         }
         public bool DeleteUserContainer(string userEmail)
         { 
