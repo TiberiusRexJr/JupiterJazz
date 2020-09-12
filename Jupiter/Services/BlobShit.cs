@@ -81,19 +81,23 @@ namespace Jupiter.Services
         {
             #region variables
             string newContainer = BlobPattern + userEmail;
-            newContainer.ToLower();
+            string modified =newContainer.ToLower();
             #endregion
             #region TryCatch
             try
             {
                 // Create the container
-                BlobContainerClient container = await BlobSClient.CreateBlobContainerAsync(newContainer);
+                Console.WriteLine(BlobSClient.AccountName.ToString());
+                Console.WriteLine("hi");
+                Console.WriteLine(modified.ToString());
+                 await BlobSClient.CreateBlobContainerAsync(modified);
 
-                if (await container.ExistsAsync())
-                {
-                    Console.WriteLine("Created container {0}", container.Name);
-                    return container;
-                }
+                /*       if (await container.ExistsAsync())
+                       {
+                           Console.WriteLine("Created container {0}", container.Name);
+                           return container;
+                       }*/
+                
             }
             catch (RequestFailedException e)
             {

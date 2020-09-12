@@ -9,7 +9,7 @@ using System.Configuration;
 using Jupiter.DataLayer;
 using Jupiter.Models;
 using System.Drawing;
-
+using Azure.Storage.Blobs;
 using System.IO;
 using System.Data;
 using Jupiter.Services;
@@ -25,17 +25,17 @@ namespace Jupiter
         protected void Page_Load(object sender, EventArgs e)
         {
             string email = "emailTest";
-            
-            LabelWarningMessage.Text = 
+
+            LabelWarningMessage.Text = CreateUserContainer(email).ToString();
              
         }
 
 
-        private async  CreateUserContainer(string email)
+        private async Task<BlobContainerClient>  CreateUserContainer(string email)
         {
             var result=await b.CreateUserContainer(email);
             return result;
-        };
+        }
         protected void Button_OnClick_Submit(object sender,EventArgs eventArgs)
         {
             bool response = false;
