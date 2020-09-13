@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using System.Threading;
 using Azure;
 using System.Security.Cryptography.Xml;
+using System.IO;
 
 namespace Jupiter.Services
 {
@@ -47,38 +48,7 @@ namespace Jupiter.Services
         {
             throw new NotImplementedException();
         }
-        /*    public string CreateUserContainer(string userEmail)
-            {
-                #region Variables
-                    IDictionary<string, string> metadata = new Dictionary<string, string>();
-                    CancellationTokenSource source = new CancellationTokenSource();
-                    CancellationToken token = source.Token;
-                string responseString = string.Empty;
-
-                #endregion
-                #region TryCatchExecute
-                try
-                {
-                   var response= BlobClient.CreateBlobContainer(BlobPattern + userEmail, PublicAccessType.Blob,metadata, token);
-                    responseString=response.GetRawResponse().ToString();
-                }
-                catch(Exception e)
-                { Console.WriteLine(e.Message); }
-
-                #endregion
-                return responseString;
-            }*/
-        /*   public bool CreateUserContainer(string userEmail)
-           {
-               #region variables
-               string newContainer =  BlobPattern + userEmail;
-               newContainer.ToLower();
-               #endregion
-               #region HttpRequest
-               HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://ldbstorage.blob.core.windows.net/"+ newContainer+"? restype=container");
-               #endregion
-               throw new NotImplementedException();
-           }*/
+   
         public (bool SuccessStatus,string ContainerName,string ContainerURI) CreateUserContainer(string userEmail)
         {
             #region variables
@@ -118,6 +88,7 @@ namespace Jupiter.Services
             return (SuccessStatus, containerName, uri); 
             #endregion
         }
+        
         public int ListUserBlobsInContainer(string userEmail)
         {
             #region Variables
@@ -143,7 +114,7 @@ namespace Jupiter.Services
             throw new NotImplementedException();
 
         }
-        public bool InsertIntoUserContainer(string userEmail)
+        public bool InsertIntoUserContainer(string userContainerName,string filename,Stream filestream)
         { 
             throw new NotImplementedException();
 
