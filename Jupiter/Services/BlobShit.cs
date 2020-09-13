@@ -13,6 +13,7 @@ using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
 using Azure;
+using System.Security.Cryptography.Xml;
 
 namespace Jupiter.Services
 {
@@ -20,7 +21,8 @@ namespace Jupiter.Services
 
     {
         #region Variables
-        private readonly string BlobPattern = "Blob";
+        private readonly string BlobPattern = "blob";
+        private readonly string ContainerPattern = "container";
         #endregion
         #region Properties
         public BlobServiceClient BlobSClient { get; set; }
@@ -77,37 +79,64 @@ namespace Jupiter.Services
                #endregion
                throw new NotImplementedException();
            }*/
-        public  async Task<BlobContainerClient> CreateUserContainer(string userEmail)
+        public (bool SuccessStatus,string ContainerName,string ContainerURI) CreateUserContainer(string userEmail)
         {
             #region variables
-            string newContainer = BlobPattern + userEmail;
-            string modified =newContainer.ToLower();
+            string randomNumber = Guid.NewGuid().ToString();
+            string _ = ContainerPattern + userEmail+randomNumber;
+            string newContainer =_.ToLower();
+
+            string containerName = string.Empty;
+            string uri = string.Empty;
+            bool SuccessStatus = false;
+
+            IDictionary<string, string> ContainerTags = new Dictionary<string, string>();
+            ContainerTags.Add("Owner", userEmail);
+
+            #endregion
+            #region TryCatchContainerExist
+            
             #endregion
             #region TryCatch
             try
             {
                 // Create the container
-                Console.WriteLine(BlobSClient.AccountName.ToString());
-                Console.WriteLine("hi");
-                Console.WriteLine(modified.ToString());
-                 await BlobSClient.CreateBlobContainerAsync(modified);
 
-                /*       if (await container.ExistsAsync())
-                       {
-                           Console.WriteLine("Created container {0}", container.Name);
-                           return container;
-                       }*/
+                BlobContainerClient container = BlobSClient.CreateBlobContainer(newContainer,PublicAccessType.Blob,ContainerTags);
+                containerName = container.Name;
+                uri = container.Uri.ToString();
+                SuccessStatus = true;
                 
+ 
             }
-            catch (RequestFailedException e)
+            catch (Azure.RequestFailedException RF)
             {
-                Console.WriteLine("HTTP error code {0}: {1}",
-                                    e.Status, e.ErrorCode);
+                
+                Console.WriteLine(RF.Message);
+            }
+
+            return (SuccessStatus, containerName, uri); 
+            #endregion
+        }
+        public int ListUserBlobsInContainer(string userEmail)
+        {
+            #region Variables
+            List<string> blobList = new List<string>();
+            int count = 100;
+            #endregion
+            #region TryExecute
+            try
+            {
+                Pageable<BlobContainerItem> blobContainers = BlobSClient.GetBlobContainers();
+                count = blobContainers.Count();
+            }
+            catch(Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
-
-            return null;
+           
             #endregion
+            return count;
         }
         public bool DeleteUserContainer(string userEmail)
         { 

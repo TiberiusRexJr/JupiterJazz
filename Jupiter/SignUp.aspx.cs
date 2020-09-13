@@ -24,18 +24,18 @@ namespace Jupiter
    
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = "emailTest";
-
-            LabelWarningMessage.Text = CreateUserContainer(email).ToString();
+            string email = "random";
+            var result = b.CreateUserContainer(email);
+            LabelWarningMessage.Text = result.ContainerURI + result.ContainerName + result.SuccessStatus.ToString();
              
         }
 
 
-        private async Task<BlobContainerClient>  CreateUserContainer(string email)
+        /*private async Task<BlobContainerClient>  CreateUserContainer(string email)
         {
             var result=await b.CreateUserContainer(email);
             return result;
-        }
+        }*/
         protected void Button_OnClick_Submit(object sender,EventArgs eventArgs)
         {
             bool response = false;
