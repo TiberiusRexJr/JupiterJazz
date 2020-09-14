@@ -73,11 +73,20 @@ namespace Jupiter
                     UserProfilePicture picture = new UserProfilePicture(_.filename,w.Id, _.contentType, _.picData);
                     statusforupload= db.UploadProfilePic(picture);
                     LabelWarningMessage.Text = statusforupload.ToString();
-                    
+
+                    b.CreateUserContainer(Session["email"].ToString());
                 }
             }
             //Response.Redirect("Login.aspx");
         }
+     /*   private (string ContainerUri,string ContaierName) SetUpUserStorage(string userEmail)
+        {
+            var resultTuple=b.CreateUserContainer(userEmail);
+            if (resultTuple.SuccessStatus)
+            {
+                return (resultTuple.ContainerURI, resultTuple.ContainerName);
+            }
+        }*/
         private bool CheckFieldForNulls()
         {
             bool valid = false;
