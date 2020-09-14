@@ -27,13 +27,14 @@ namespace Jupiter.Services
         #endregion
         #region Properties
         public BlobServiceClient BlobSClient { get; set; }
+        /*public BlobContainerClient BlobCClient { get; set; }*/
         #endregion
         #region Constructor
          public BlobShit()
         {
             try {
                 BlobSClient = new BlobServiceClient(ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey"));
-                
+               
             }
             catch (Exception e)
             {
@@ -44,11 +45,7 @@ namespace Jupiter.Services
         }
         #endregion
         #region Functions
-        public bool UserContainerExist(string userEmail)
-        {
-            throw new NotImplementedException();
-        }
-   
+
         public (bool SuccessStatus,string ContainerName,string ContainerURI) CreateUserContainer(string userEmail)
         {
             #region variables
@@ -63,9 +60,6 @@ namespace Jupiter.Services
             IDictionary<string, string> ContainerTags = new Dictionary<string, string>();
             ContainerTags.Add("Owner", userEmail);
 
-            #endregion
-            #region TryCatchContainerExist
-            
             #endregion
             #region TryCatch
             try
@@ -115,10 +109,31 @@ namespace Jupiter.Services
 
         }
         public bool InsertIntoUserContainer(string userContainerName,string filename,Stream filestream)
-        { 
-            throw new NotImplementedException();
+        {
+            #region Variables
+            bool UploadStatus = false;
+            #endregion
+            #region TryExecuteUploadBlob
+            try
+            {
+                BlobContainerClient BlobCClient = new BlobContainerClient(ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey"), userContainerName);
+             BlobContentInfo response=   BlobCClient.UploadBlob(filename, filestream);
 
+                if (response.LastModified.Date != null)
+                { 
+                UploadStatus = true;
+                
+                }
+            }
+            catch (Azure.RequestFailedException RFE)
+            {
+                UploadStatus = false;
+                Console.WriteLine(RFE.Message);
+            }
+            #endregion
+            return UploadStatus;
         }
+      
         #endregion
     }
 }

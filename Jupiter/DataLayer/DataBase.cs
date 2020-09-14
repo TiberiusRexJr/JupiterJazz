@@ -79,6 +79,9 @@ namespace Jupiter.DataLayer
             command.Parameters.AddWithValue("@email", worker.Email);
             command.Parameters.AddWithValue("@password", worker.Password);
             command.Parameters.AddWithValue("@query", queryCode);
+            command.Parameters.AddWithValue("@storageUri", worker.StorageContainerUri);
+            command.Parameters.AddWithValue("@storageContainerName", worker.StorageContainerName);
+ 
             #endregion
             #region TryExecuteCatch
             try
@@ -201,6 +204,8 @@ namespace Jupiter.DataLayer
                     worker.Email = dataSet.Tables[0].Rows[i]["Email"].ToString();
                     worker.Password = dataSet.Tables[0].Rows[i]["Psword"].ToString();
                     worker.UserType = dataSet.Tables[0].Rows[i]["UserType"].ToString();
+                    worker.StorageContainerUri = dataSet.Tables[0].Rows[i]["StorageUri"].ToString();
+                    worker.StorageContainerName = dataSet.Tables[0].Rows[i]["StorageContainerName"].ToString();
                 }
                 return worker;
 

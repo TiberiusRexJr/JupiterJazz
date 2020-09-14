@@ -24,24 +24,18 @@ namespace Jupiter
    
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = "random";
-            var result = b.CreateUserContainer(email);
-            LabelWarningMessage.Text = result.ContainerURI + result.ContainerName + result.SuccessStatus.ToString();
+           
              
         }
 
-
-        /*private async Task<BlobContainerClient>  CreateUserContainer(string email)
-        {
-            var result=await b.CreateUserContainer(email);
-            return result;
-        }*/
         protected void Button_OnClick_Submit(object sender,EventArgs eventArgs)
         {
             bool response = false;
             if (CheckFieldForNulls() && CheckPassword())
             {
-                Worker worker = new Worker { FirstName = TextBoxFirstName.Text, LastName = TextBoxLastName.Text, Email = TextBoxEmail.Text, Password = TextBoxPassword.Text };
+               var responseTupleCreateUserContainer = b.CreateUserContainer(TextBoxEmail.Text);
+
+                Worker worker = new Worker { FirstName = TextBoxFirstName.Text, LastName = TextBoxLastName.Text, Email = TextBoxEmail.Text, Password = TextBoxPassword.Text,StorageContainerUri= responseTupleCreateUserContainer.ContainerURI,StorageContainerName= responseTupleCreateUserContainer.ContainerName };//PFUA
                 if (response = db.Create(worker)) //possible fuck up area
                 {
                     Session["firstName"] = worker.FirstName;
@@ -64,29 +58,19 @@ namespace Jupiter
             {
                 if (FileUploadProfilePic.HasFile)
                 {
-                    var _ = GetPicData();
-                    bool statusforupload = false;
-                    Worker w = db.RetrieveByEmail(Session["email"].ToString());
-                    Console.WriteLine(Session["email"].ToString());
+                    bool fileuploadStatus = false;
+                    //get stream,get filename (from picdata),
+                    var responseTupleGetPicData = GetPicData();
+                    //get user container name
+                    Worker worker=db.RetrieveByEmail(Session["email"].ToString()); //PFUA
 
-                    Console.WriteLine(w.Id.ToString());
-                    UserProfilePicture picture = new UserProfilePicture(_.filename,w.Id, _.contentType, _.picData);
-                    statusforupload= db.UploadProfilePic(picture);
-                    LabelWarningMessage.Text = statusforupload.ToString();
-
-                    b.CreateUserContainer(Session["email"].ToString());
+                    fileuploadStatus= b.InsertIntoUserContainer(worker.StorageContainerName, responseTupleGetPicData.profilePicName, responseTupleGetPicData.picStream);
+                    LabelWarningMessage.Text = fileuploadStatus.ToString();
                 }
             }
             //Response.Redirect("Login.aspx");
         }
-     /*   private (string ContainerUri,string ContaierName) SetUpUserStorage(string userEmail)
-        {
-            var resultTuple=b.CreateUserContainer(userEmail);
-            if (resultTuple.SuccessStatus)
-            {
-                return (resultTuple.ContainerURI, resultTuple.ContainerName);
-            }
-        }*/
+  
         private bool CheckFieldForNulls()
         {
             bool valid = false;
@@ -144,32 +128,24 @@ namespace Jupiter
             }
             return valid;
             }      
-        private (string filename,string contentType,byte[] picData) GetPicData()
+        private (Stream picStream,string profilePicName) GetPicData()
         {
             
-            string filename=null;
-            string contentType=null;
-            byte[] picData = null;
+            string profilePicName = null;
+            Stream picStream = null;
+            string randomSequence = new Guid().ToString();
 
             if (FileUploadProfilePic.HasFile)
             {
 
-                filename = Path.GetFileName(FileUploadProfilePic.PostedFile.FileName);
-               
-                contentType = FileUploadProfilePic.PostedFile.ContentType;
-                Stream fs = FileUploadProfilePic.PostedFile.InputStream;
-                BinaryReader br = new BinaryReader(fs);
-                picData = br.ReadBytes((Int32)fs.Length);
+                profilePicName = Path.GetFileName(FileUploadProfilePic.PostedFile.FileName);
+                profilePicName += randomSequence;
+
+                picStream = FileUploadProfilePic.PostedFile.InputStream;
 
             }
-            return (filename,contentType,picData);
+            return (picStream, profilePicName);
         }
-      /*  protected bool UploadPicture(string fileName, string contentType, byte[] picData, string email)
-        {
-            bool responseStatus = false;
-            responseStatus = db.UploadProfilePic(fileName, contentType, picData, email);
-            return responseStatus;
-        }*/
 
     }
 }
