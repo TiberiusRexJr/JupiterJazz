@@ -77,6 +77,7 @@ namespace Jupiter.Services
             {
                 
                 Console.WriteLine(RF.Message);
+                Console.WriteLine("Failure from CreateuserContainer");
             }
 
             return (SuccessStatus, containerName, uri); 
