@@ -58,14 +58,23 @@ namespace Jupiter
             {
                 if (FileUploadProfilePic.HasFile)
                 {
-                    bool fileuploadStatus = false;
+                    string fileuploadStatus = string.Empty;
                     //get stream,get filename (from picdata),
                     var responseTupleGetPicData = GetPicData();
                     //get user container name
                     Worker worker=db.RetrieveByEmail(Session["email"].ToString()); //PFUA
 
                     fileuploadStatus= b.InsertIntoUserContainer(worker.StorageContainerName, responseTupleGetPicData.profilePicName, responseTupleGetPicData.picStream);
+                    LabelWarningMessage.Text = fileuploadStatus;
+                   /* if (fileuploadStatus)
+                    {
+                        Response.Redirect("Login.aspx");
+                    }
+                    else
+                    { 
                     LabelWarningMessage.Text = fileuploadStatus.ToString();
+                    
+                    }*/
                 }
             }
             //Response.Redirect("Login.aspx");
@@ -139,7 +148,7 @@ namespace Jupiter
             {
 
                 profilePicName = Path.GetFileName(FileUploadProfilePic.PostedFile.FileName);
-                profilePicName += randomSequence;
+                
 
                 picStream = FileUploadProfilePic.PostedFile.InputStream;
 

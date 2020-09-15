@@ -15,6 +15,7 @@ using System.Threading;
 using Azure;
 using System.Security.Cryptography.Xml;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Jupiter.Services
 {
@@ -49,9 +50,12 @@ namespace Jupiter.Services
         public (bool SuccessStatus,string ContainerName,string ContainerURI) CreateUserContainer(string userEmail)
         {
             #region variables
+          /*  Regex rgx = new Regex("[^a-zA-Z0-9 -]");*/
+            
             string randomNumber = Guid.NewGuid().ToString();
             string _ = ContainerPattern + userEmail+randomNumber;
-            string newContainer =_.ToLower();
+            string temp_toLower =_.ToLower();
+            /*string submittedContainerName = rgx.Replace(temp_toLower, "");*/
 
             string containerName = string.Empty;
             string uri = string.Empty;
@@ -66,7 +70,7 @@ namespace Jupiter.Services
             {
                 // Create the container
 
-                BlobContainerClient container = BlobSClient.CreateBlobContainer(newContainer,PublicAccessType.Blob,ContainerTags);
+                BlobContainerClient container = BlobSClient.CreateBlobContainer(temp_toLower, PublicAccessType.Blob,ContainerTags);
                 containerName = container.Name;
                 uri = container.Uri.ToString();
                 SuccessStatus = true;
@@ -109,10 +113,10 @@ namespace Jupiter.Services
             throw new NotImplementedException();
 
         }
-        public bool InsertIntoUserContainer(string userContainerName,string filename,Stream filestream)
+        public string InsertIntoUserContainer(string userContainerName,string filename,Stream filestream)
         {
             #region Variables
-            bool UploadStatus = false;
+            string UploadStatus = string.Empty;
             #endregion
             #region TryExecuteUploadBlob
             try
@@ -120,15 +124,16 @@ namespace Jupiter.Services
                 BlobContainerClient BlobCClient = new BlobContainerClient(ConfigurationManager.AppSettings.Get("ConnectionStrings--JupiterJazzStorageKey"), userContainerName);
              BlobContentInfo response=   BlobCClient.UploadBlob(filename, filestream);
 
-                if (response.LastModified.Date != null)
-                { 
-                UploadStatus = true;
-                
-                }
+                /*    if (response.LastModified.Date != null)
+                    { 
+                    UploadStatus = true;
+
+                    }*/
+                UploadStatus = "ok";
             }
             catch (Azure.RequestFailedException RFE)
             {
-                UploadStatus = false;
+                UploadStatus = RFE.ErrorCode+" "+RFE.Status.ToString();
                 Console.WriteLine(RFE.Message);
             }
             #endregion
