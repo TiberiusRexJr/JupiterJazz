@@ -56,7 +56,8 @@ namespace Jupiter
             }
             if (response) //PFUA
             {
-                if (FileUploadProfilePic.HasFile)
+                Response.Redirect("/Users/UserDashBoard.aspx");
+                /*if (FileUploadProfilePic.HasFile)
                 {
                     string fileuploadStatus = string.Empty;
                     //get stream,get filename (from picdata),
@@ -66,7 +67,7 @@ namespace Jupiter
 
                     fileuploadStatus= b.InsertIntoUserContainer(worker.StorageContainerName, responseTupleGetPicData.profilePicName, responseTupleGetPicData.picStream);
                     LabelWarningMessage.Text = fileuploadStatus;
-                   /* if (fileuploadStatus)
+                   *//* if (fileuploadStatus)
                     {
                         Response.Redirect("Login.aspx");
                     }
@@ -74,8 +75,8 @@ namespace Jupiter
                     { 
                     LabelWarningMessage.Text = fileuploadStatus.ToString();
                     
-                    }*/
-                }
+                    }*//*
+                }*/
             }
             //Response.Redirect("Login.aspx");
         }

@@ -274,6 +274,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\Custom.css" />
+    <Content Include="css\heroic-features.css" />
     <Content Include="css\owl.carousel.css" />
     <Content Include="css\owl.carousel.min.css" />
     <Content Include="css\owl.theme.default.min.css" />
@@ -300,6 +301,8 @@
     <Content Include="scripts\owl.carousel.min.js" />
     <Content Include="scripts\slider.js" />
     <Content Include="SignUp.aspx" />
+    <Content Include="Users\UserDashBoard.aspx" />
+    <Content Include="Users\UserProfilePage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +367,27 @@
     <Compile Include="SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\MasterPage_User.Master.cs">
+      <DependentUpon>MasterPage_User.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\MasterPage_User.Master.designer.cs">
+      <DependentUpon>MasterPage_User.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserDashBoard.aspx.cs">
+      <DependentUpon>UserDashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\UserDashBoard.aspx.designer.cs">
+      <DependentUpon>UserDashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserProfilePage.aspx.cs">
+      <DependentUpon>UserProfilePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\UserProfilePage.aspx.designer.cs">
+      <DependentUpon>UserProfilePage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.Master" />
@@ -374,6 +398,7 @@
     <None Include="packages.config" />
     <Content Include="scripts\jquery-3.4.1.min.map" />
     <Content Include="scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Users\MasterPage_User.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

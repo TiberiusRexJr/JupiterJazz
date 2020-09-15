@@ -76,7 +76,7 @@ namespace Jupiter
 
                 if (worker.UserType == "u")
                 {
-                    Response.Redirect("default.aspx");
+                    Response.Redirect("/Users/UserDashBoard.aspx");
                 }
                 else if (worker.UserType == "a")
                 {
