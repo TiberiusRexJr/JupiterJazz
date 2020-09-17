@@ -287,6 +287,7 @@
     <Content Include="images\gundam.jpg" />
     <Content Include="LogIn.aspx" />
     <Content Include="AddProduct.aspx" />
+    <Content Include="scripts\bootstrap.bundle.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="MasterPageAdmin.Master" />
@@ -297,6 +298,7 @@
     <Content Include="scripts\jquery-3.4.1.min.js" />
     <Content Include="scripts\jquery-3.4.1.slim.js" />
     <Content Include="scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="scripts\jquery.min.js" />
     <Content Include="scripts\modernizr-2.8.3.js" />
     <Content Include="scripts\owl.carousel.min.js" />
     <Content Include="scripts\slider.js" />
